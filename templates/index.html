@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Drowsy Driver Detection</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; text-align: center; }
+        .container { background: white; padding: 20px; margin: 50px auto; width: 400px; border-radius: 10px; box-shadow: 0px 0px 10px gray; }
+        input, button { padding: 10px; margin: 10px; width: 90%; }
+        button { background-color: #28a745; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #218838; }
+        .result { font-size: 18px; color: #333; margin-top: 15px; }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <div class="container">
+        <h2>Drowsy Driver Detection</h2>
+        <form action="/predict" method="post">
+            <input type="number" name="eye_blink_rate" placeholder="Eye Blink Rate (per minute)" step="1" required>
+            <input type="number" name="steering_variation" placeholder="Steering Variation (%)" step="0.1" required>
+            <input type="number" name="hours_driven" placeholder="Hours Driven" step="0.1" required>
+            <input type="number" name="heart_rate" placeholder="Heart Rate (bpm)" step="1" required>
+            <input type="number" name="caffeine_intake" placeholder="Caffeine Intake (cups)" step="1" required>
+            <button type="submit">Predict</button>
+        </form>
+        {% if prediction %}
+        <div class="result">{{ prediction }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
